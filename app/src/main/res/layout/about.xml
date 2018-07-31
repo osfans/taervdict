@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="@string/app_descrip"
-        android:textColor="?android:attr/textColorPrimaryInverse" />
+        android:textColor="?android:attr/textColorPrimary" />
 
     <TextView
         android:id="@+id/about_credits"
@@ -35,6 +35,6 @@
         android:textSize="16sp"
         android:text="@string/app_credits"
         android:autoLink="web"
-        android:textColor="?android:attr/textColorPrimaryInverse" />
+        android:textColor="?android:attr/textColorPrimary" />
 
 </LinearLayout>

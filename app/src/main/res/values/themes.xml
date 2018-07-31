@@ -15,7 +15,7 @@
 -->
 
 <resources>
-    <style name="LookupTheme" parent="@android:style/Theme.Light.NoTitleBar">
+    <style name="LookupTheme" parent="@android:style/Theme.Holo.Light">
         <item name="android:windowBackground">@drawable/lookup_bg</item>
     </style>
 </resources>
