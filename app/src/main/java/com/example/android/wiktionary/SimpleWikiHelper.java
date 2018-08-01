@@ -52,8 +52,8 @@ public class SimpleWikiHelper {
      * the desired page title after escaping it as needed.
      */
     private static final String WIKTIONARY_PAGE =
-            "http://en.wiktionary.org/w/api.php?action=query&prop=revisions&titles=%s&" +
-            "rvprop=content&format=json%s";
+            "http://taerv.nguyoeh.com/dict/query.php?table=%E5%AD%97%E5%85%B8&format=json&%E7%B0%A1%E9%AB%94=";
+
 
     /**
      * Partial URL to append to {@link #WIKTIONARY_PAGE} when you want to expand
@@ -141,17 +141,26 @@ public class SimpleWikiHelper {
         String expandClause = expandTemplates ? WIKTIONARY_EXPAND_TEMPLATES : "";
 
         // Query the API for content
-        String content = getUrlContent(String.format(WIKTIONARY_PAGE,
-                encodedTitle, expandClause));
+        String content = getUrlContent(WIKTIONARY_PAGE + encodedTitle);
         try {
             // Drill into the JSON response to find the content body
             JSONObject response = new JSONObject(content);
-            JSONObject query = response.getJSONObject("query");
-            JSONObject pages = query.getJSONObject("pages");
-            JSONObject page = pages.getJSONObject((String) pages.keys().next());
-            JSONArray revisions = page.getJSONArray("revisions");
-            JSONObject revision = revisions.getJSONObject(0);
-            return revision.getString("*");
+            JSONArray query = response.getJSONArray("字典");
+            StringBuilder result = new StringBuilder();
+            for (int i = 0 ; i < query.length(); i++) {
+                JSONObject entry = query.getJSONObject(i);
+                if (entry.has("index")) {
+                    String ft = entry.getString("hz");
+                    String py = entry.getString("py");
+                    result.append(String.format("<a lang=zh-hant><ruby>%s<rt>%s</rt></ruby></a> &nbsp;", ft, py));
+                } else {
+                    String ft = entry.getString("正體");
+                    String jt = entry.getString("簡體");
+                    String py = entry.getString("拼音");
+                    result.append(String.format("<p lang=zh-hant><ruby>%1$s<rt>%3$s</rt></ruby> <a lang=zh-hans>%2$s</a> %4$s %5$s</p>", ft, (ft.contentEquals(jt)?"":"("+jt+")"), py, entry.getString("詞例").replaceAll(ft, "～"), entry.getString("備註")));
+                }
+            }
+            return result.toString();
         } catch (JSONException e) {
             throw new ParseException("Problem parsing API response", e);
         }

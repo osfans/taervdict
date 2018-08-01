@@ -90,7 +90,7 @@ public class ExtendedWikiHelper extends SimpleWikiHelper {
      * {@link Uri} to use when requesting a random page.
      */
     private static final String WIKTIONARY_RANDOM =
-        "http://en.wiktionary.org/w/api.php?action=query&list=random&format=json";
+        "http://taerv.nguyoeh.com/dict/query.php?table=%E5%AD%97%E5%85%B8&random=1&format=json";
 
     /**
      * Fake section to insert at the bottom of a wiki response before parsing.
@@ -206,15 +206,15 @@ public class ExtendedWikiHelper extends SimpleWikiHelper {
             try {
                 // Drill into the JSON response to find the returned word
                 JSONObject response = new JSONObject(content);
-                JSONObject query = response.getJSONObject("query");
-                JSONArray random = query.getJSONArray("random");
+                //JSONObject query = response.getJSONObject("query");
+                JSONArray random = response.getJSONArray("字典");
                 JSONObject word = random.getJSONObject(0);
-                String foundWord = word.getString("title");
+                String foundWord = word.getString("正體");
 
                 // If we found an actual word, and it wasn't rejected by our invalid
                 // filter, then accept and return it.
-                if (foundWord != null &&
-                        !sInvalidWord.matcher(foundWord).find()) {
+                if (foundWord != null /*&&
+                        !sInvalidWord.matcher(foundWord).find()*/) {
                     return foundWord;
                 }
             } catch (JSONException e) {

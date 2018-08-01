@@ -290,7 +290,7 @@ public class LookupActivity extends Activity implements AnimationListener {
                     // Push our requested word to the title bar
                     publishProgress(query);
                     String wikiText = ExtendedWikiHelper.getPageContent(query, true);
-                    parsedText = ExtendedWikiHelper.formatWikiText(wikiText);
+                    parsedText = wikiText; //ExtendedWikiHelper.formatWikiText(wikiText);
                 }
             } catch (ApiException e) {
                 Log.e(TAG, "Problem making wiktionary request", e);
