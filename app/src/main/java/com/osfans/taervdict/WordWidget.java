@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.example.android.wiktionary;
+package com.osfans.taervdict;
 
-import com.example.android.wiktionary.SimpleWikiHelper.ApiException;
-import com.example.android.wiktionary.SimpleWikiHelper.ParseException;
+import com.osfans.taervdict.SimpleWikiHelper.ApiException;
+import com.osfans.taervdict.SimpleWikiHelper.ParseException;
 
 import android.app.PendingIntent;
 import android.app.Service;

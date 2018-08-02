@@ -15,7 +15,7 @@
 -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.wiktionary"
+    package="com.osfans.taervdict"
     android:versionCode="1"
     android:versionName="1.0">
 

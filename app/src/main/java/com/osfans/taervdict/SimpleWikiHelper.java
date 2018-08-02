@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.wiktionary;
+package com.osfans.taervdict;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

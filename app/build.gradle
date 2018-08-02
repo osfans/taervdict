@@ -5,7 +5,7 @@ android {
     buildToolsVersion "28.0.1"
 
     defaultConfig {
-        applicationId "com.example.android.wiktionary"
+        applicationId "com.osfans.taervdict"
         minSdkVersion 3
         targetSdkVersion 28
     }
