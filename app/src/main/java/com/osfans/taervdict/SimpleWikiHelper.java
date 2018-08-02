@@ -52,7 +52,7 @@ public class SimpleWikiHelper {
      * the desired page title after escaping it as needed.
      */
     private static final String WIKTIONARY_PAGE =
-            "http://taerv.nguyoeh.com/dict/query.php?table=%E5%AD%97%E5%85%B8&format=json&%E7%B0%A1%E9%AB%94=";
+            "http://taerv.nguyoeh.com/dict/query.php?table=%E5%AD%97%E5%85%B8&format=json&";
 
 
     /**
@@ -137,8 +137,8 @@ public class SimpleWikiHelper {
     public static String getPageContent(String title, boolean expandTemplates)
             throws ApiException, ParseException {
         // Encode page title and expand templates if requested
-        String encodedTitle = Uri.encode(title);
-        String expandClause = expandTemplates ? WIKTIONARY_EXPAND_TEMPLATES : "";
+        String encodedTitle = Uri.encode(title.matches("[a-z0-8]+")?"py":"簡體")+"="+Uri.encode(title);
+        //String expandClause = expandTemplates ? WIKTIONARY_EXPAND_TEMPLATES : "";
 
         // Query the API for content
         String content = getUrlContent(WIKTIONARY_PAGE + encodedTitle);

@@ -45,7 +45,7 @@
 
 
     <string name="search_label">查詢泰如字典</string>
-    <string name="search_hint">輸入漢字</string>
+    <string name="search_hint">請輸入漢字或拼音</string>
 
     <string name="lookup_search">查詢</string>
     <string name="lookup_random">隨機</string>
