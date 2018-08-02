@@ -16,8 +16,8 @@
 
 <resources>
     <string name="app_name">泰如字典</string>
-    <string name="app_descrip">osfans編寫的在線字典程序</string>
-    <string name="app_credits">"數據由hisahara的泰如小字典提供  http://taerv.nguyoeh.com/zidian"</string>
+    <string name="app_descrip">osfans編寫的在線字典程序 https://github.com/osfans/taervdict</string>
+    <string name="app_credits">數據由hisahara的泰如小字典提供  http://taerv.nguyoeh.com/zidian</string>
 
     <string name="template_user_agent" translatable="false">"%1$s/%2$s (Linux; Android)"</string>
     <string name="template_wotd_title">"Wiktionary:Word of the day/%1$s %2$s"</string>

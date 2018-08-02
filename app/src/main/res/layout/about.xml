@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="@string/app_descrip"
+        android:autoLink="web"
         android:textColor="?android:attr/textColorPrimary" />
 
     <TextView
