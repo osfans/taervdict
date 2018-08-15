@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class LookupActivity extends Activity implements AnimationListener {
 
     private View mTitleBar;
     private TextView mTitle;
+    private Typeface mTypeface;
     private ProgressBar mProgress;
     private WebView mWebView;
 
@@ -97,6 +99,8 @@ public class LookupActivity extends Activity implements AnimationListener {
 
         mTitleBar = findViewById(R.id.title_bar);
         mTitle = (TextView) findViewById(R.id.title);
+        mTypeface = Typeface.createFromAsset(getAssets(),"font/HanaMinB.ttf");
+        mTitle.setTypeface(mTypeface);
         mProgress = (ProgressBar) findViewById(R.id.progress);
         mWebView = (WebView) findViewById(R.id.webview);
 
@@ -290,7 +294,7 @@ public class LookupActivity extends Activity implements AnimationListener {
                     // Push our requested word to the title bar
                     publishProgress(query);
                     String wikiText = ExtendedWikiHelper.getPageContent(query, true);
-                    parsedText = wikiText; //ExtendedWikiHelper.formatWikiText(wikiText);
+                    parsedText = ExtendedWikiHelper.formatWikiText(wikiText);
                 }
             } catch (ApiException e) {
                 Log.e(TAG, "Problem making wiktionary request", e);

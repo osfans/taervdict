@@ -40,10 +40,13 @@ public class ExtendedWikiHelper extends SimpleWikiHelper {
      * results. It formats nicely for a mobile screen, and hides some content
      * boxes to keep things tidy.
      */
-    private static final String STYLE_SHEET = "<style>h2 {font-size:1.2em;font-weight:normal;} " +
-            "a {color:#6688cc;} ol {padding-left:1.5em;} blockquote {margin-left:0em;} " +
-            ".interProject, .noprint {display:none;} " +
-            "li, blockquote {margin-top:0.5em;margin-bottom:0.5em;}</style>";
+    private static final String STYLE_SHEET = "<style>" +
+            "@font-face { font-family: Charis; src: url('font/CharisSIL-R.ttf'); }" +
+            "@font-face { font-family: HanaMin; src: url('font/HanaMinB.ttf'); }" +
+            "body {font-family: sans-serif, HanaMin;}"+
+            ".ipa {font-family: Charis; color: blue;}" +
+            ":lang(zh-hans) {color: darkgray; }" +
+            "</style>";
 
     /**
      * Pattern of section titles we're interested in showing. This trims out
@@ -69,7 +72,7 @@ public class ExtendedWikiHelper extends SimpleWikiHelper {
     /**
      * {@link Uri} authority to use when creating internal links.
      */
-    public static final String WIKI_AUTHORITY = "wiktionary";
+    public static final String WIKI_AUTHORITY = "file:///android_asset/";
 
     /**
      * {@link Uri} host to use when creating internal links.
@@ -237,34 +240,6 @@ public class ExtendedWikiHelper extends SimpleWikiHelper {
     public static String formatWikiText(String wikiText) {
         if (wikiText == null) {
             return null;
-        }
-
-        // Insert a fake last section into the document so our section splitter
-        // can correctly catch the last section.
-        wikiText = wikiText.concat(STUB_SECTION);
-
-        // Read through all sections, keeping only those matching our filter,
-        // and only including the first entry for each title.
-        HashSet<String> foundSections = new HashSet<String>();
-        StringBuilder builder = new StringBuilder();
-
-        Matcher sectionMatcher = sSectionSplit.matcher(wikiText);
-        while (sectionMatcher.find()) {
-            String title = sectionMatcher.group(1);
-            if (!foundSections.contains(title) &&
-                    sValidSections.matcher(title).matches()) {
-                String sectionContent = sectionMatcher.group();
-                foundSections.add(title);
-                builder.append(sectionContent);
-            }
-        }
-
-        // Our new wiki text is the selected sections only
-        wikiText = builder.toString();
-
-        // Apply all formatting rules, in order, to the wiki text
-        for (FormatRule rule : sFormatRules) {
-            wikiText = rule.apply(wikiText);
         }
 
         // Return the resulting HTML with style sheet, if we have content left
