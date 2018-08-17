@@ -151,13 +151,13 @@ public class SimpleWikiHelper {
                 JSONObject entry = query.getJSONObject(i);
                 if (entry.has("index")) {
                     String ft = entry.getString("hz");
-                    String py = entry.getString("py");
-                    result.append(String.format("<a lang=zh-hant><ruby>%s<rt>%s</rt></ruby></a> &nbsp;", ft, py));
+                    String py = entry.getString("拼音");
+                    result.append(String.format("<a lang=zh-hant><ruby>%s<rt>%s</rt></ruby></a>&nbsp;", ft, py));
                 } else {
                     String ft = entry.getString("正體");
                     String jt = entry.getString("簡體");
                     String py = entry.getString("拼音");
-                    result.append(String.format("<p lang=zh-hant><ruby>%1$s<rt>%3$s</rt></ruby> <a lang=zh-hans>%2$s</a> %4$s %5$s</p>", ft, (ft.contentEquals(jt)?"":"("+jt+")"), py, entry.getString("詞例").replaceAll(ft, "～"), entry.getString("備註")));
+                    result.append(String.format("<div lang=zh-hant><ruby>%s<rt>%s</rt></ruby><a lang=zh-hans>（%s）</a><a class=ipa>/%s/</a>&nbsp;<sub>%s</sub>&nbsp;%s&nbsp;%s</div>", ft, py, jt, entry.getString("音標"), entry.getString("讀音說明"), entry.getString("詞例").replaceAll(ft, "～"), entry.getString("備註")));
                 }
             }
             return result.toString();
